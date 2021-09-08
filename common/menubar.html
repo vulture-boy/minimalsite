@@ -1,0 +1,56 @@
+<div id="menuBar" class="flex-shrink-0 p-3" style="width: 280px;">
+    <a href="/" class="d-flex align-items-left pb-3 mb-3 link-dark text-decoration-none border-bottom">
+      <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+
+    </a>
+
+    <a href="/" id="titleName">tyson moll</a>
+
+    <ul class="list-unstyled ps-0">
+
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#games-collapse" aria-expanded="false">
+          games
+        </button>
+        <div class="collapse" id="games-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="/games.html" class="link-dark rounded">spotlight</a></li>
+            <li><a href="/games_archive.html" class="link-dark rounded">archive</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#photo-collapse" aria-expanded="false">
+          photography
+        </button>
+        <div class="collapse" id="photo-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">spotlight</a></li>
+            <li><a href="#" class="link-dark rounded">2021</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#art-collapse" aria-expanded="false">
+          drawing
+        </button>
+        <div class="collapse" id="art-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">architecture</a></li>
+            <li><a href="#" class="link-dark rounded">pixels</a></li>
+            <li><a href="#" class="link-dark rounded">sketches</a></li>
+          </ul>
+        </div>
+      </li>
+
+
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <div w3-include-html="/common/socials.html"></div>        
+      </li>
+    </ul>
+</div>
+
+<script src="/dressing/sidebars.js"></script>

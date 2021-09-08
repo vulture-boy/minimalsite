@@ -1,0 +1,27 @@
+h1 {
+    font-family: serif;
+    background-color: #f0eeeb;
+
+}
+
+
+body {
+    font-family: 'Arial', monospace;
+    color: #262625;
+    background-color: #f0eeeb;
+}
+
+footer {
+    font-family: sans-serif;
+    text-align: right;
+}
+
+#menuBar {
+    font-family: 'Major Mono Display', monospace;
+    background-color: #f0eeeb;
+
+}
+
+a:link, a:visited {
+    color: #736d68;
+}
