@@ -1,235 +1,76 @@
-function setup() {
-    CanvasPrep(); // Prepare Canvas
-    DOMPrep(); // Prepare Option DOMs
-    Initialization(); // Initialization scripts
-    UpdateAll();
-}
+/*
 
-/// Setup for Canvas elements
-function CanvasPrep() {
-    extentsX = windowWidth; 
-    extentsY = windowHeight;
-    var cnv = createCanvas(extentsX, extentsY);
-    cnv.parent('jumbo-canvas')
-    cnv.position(0, 0);
-    cnv.style('z-index','0'); // Canvas as background element
-    frameRate(fr)
-}
+Blur Matrix Backdrop
+By Tyson Moll (2021)
 
-/// Setup for DOM elements
-function DOMPrep() {
-
-}
-
-/// Initialization of canvas elements
-function Initialization() {
-    //deadColor = color("#d1ccc7ff"); // The colour of a dead cell
-    deadColor = color("#bfb9b2e6"); // The colour of a dead cell
-    liveColor = color("#f2ffef00"); // The colour of a live cell
-    InitializeCells();
-}
-
-function draw() {
-    UpdateAll(); // Runs all Update scripts
-}
-
-/// Update cycle for canvas elements
-function UpdateAll() {
-    RunActions();
-    MouseHover();
-    Visualize();
-}
-
-/// Mouse Press: inverts a cell at the clicked location
-function MouseHover() {
-
-    // Find cell position relative to mouse
-    var i = floor((mouseX / windowWidth) * numCellsX);
-    var j = floor((mouseY / windowHeight) * numCellsY);
-    var mPoint = [i,j];
-
-    // Confirm Cell is within space
-    if (mPoint[0] >= 0 && mPoint[0] < numCellsX && mPoint[1] >= 0 && mPoint[1] < numCellsY) {
-        if (mouseBool) { 
-            cells[mPoint[0]][mPoint[1]] = 1;
-        } else {
-            cells[mPoint[0]][mPoint[1]] = 0;
-        } 
-    }
-
-    lastCellX = mPoint[0];
-    lastCellY = mPoint[1];
-}
-
-var mouseBool = false;
-
-function mousePressed() {
-    mouseBool = true;
-
-}
-
-function mouseReleased() {
-    mouseBool = false;
-    if (mouseButton === RIGHT) {
-        InitializeCells();
-    }
-}
-
+*/
 
 // Cell Properties 
 {    
     var initMethod = 2; // Determines which method to use when assigning init values
     var behaveMethod = 0; // Behaviour Method
-    var cells = []; // Array of all cells in process
-    var cellsTemp = []; // Used for storing update data (aka next generation)
+    var neutralValue = 0.5;
+    var cells = [[],[]];
     var cellSize = 24; // Cell Size (pixels)
+    var numCells = [0,0]
     var shades = 1; // Number of shades? Not used this way presently
     var deadColor; // The colour of a dead cell
     var liveColor; // The colour of a live cell
-    var gridColor;
-    var genColMethod = 0;
     var shape = 0;
-
-    
-    var autoRun = true; // Whether to automatically advance the cycle
-    var tick = false; // Set to true to advance by one cycle while paused
-    var autoRunTime = 0; // Last recorded cycle end time
-    var fr = 15; // Frame rate
-    var autoRunTimeMax = 60;
-
+    var bufferActive = 0;
 }
 
 // Canvas Properties
 {
-    var extentsX; // Determines the size of the canvas
-    var extentsY;
+    var extents = [0,0]; // Determines the size of the canvas
+    var autoRun = true; // Whether to automatically advance the cycle
+    var autoRunTime = 0; // Last recorded cycle end time
+    var fr = 15; // Frame rate
+    var autoRunTimeMax = 60;
 }
 
-    /// Determines when cycles are processed
-    function RunActions() {
-            
-        if (autoRun || tick) {
-
-            // Check if dx time exceeds wait time
-            if (autoRunTimeMax < millis() - autoRunTime) {
-                switch (behaveMethod) {
-                    case 0:
-                    default:
-                        Interact();
-                    break;
-                }
-
-                autoRunTime = millis(); // Reset the timer
-            }
-
-            tick = false;
-        }
+///////////////// PREP & RUNNERS ///////////////////
+{
+    function setup() {
+        CanvasPrep(); // Prepare Canvas
+        Initialization(); // Initialization scripts
+        UpdateAll();
     }
 
-function Interact() {
-    for (var i=0; i<numCellsX; i++) {
-        for (var j=0; j<numCellsY; j++) {
-            
-            if (behaveMethod == 0) {    // Blur
-
-                var distX = 2;
-                //var distX2 = 3;
-                var distY = 2;
-
-                // Check Neighbours
-                if (i < numCellsX - distX) {
-                    valRight = cells[i+distX][j];
-                } else {
-                    valRight = cells[i][j];
-                }
-
-                /*
-                    // Check Neighbours
-                    if (i < numCellsX - distX2) {
-                        valRight2 = cells[i+distX2][j];
-                    } else {
-                        valRight2 = cells[i][j];
-                    }
-
-                    if (i > distX2) {
-                        valLeft2 = cells[i-distX2][j];
-                    } else {
-                        valLeft2 = cells[i][j];
-                    }
-                */
-                if (j < numCellsY - distY) {
-                    valDown = cells[i][j+distY];
-                } else {
-                    valDown = cells[i][j];
-                }
-
-                if (i > distX) {
-                    valLeft = cells[i-distX][j];
-                } else {
-                    valLeft = cells[i][j];
-                }
-                
-                if (j > distY) {
-                    valUp = cells[i][j-distY];
-                } else {
-                    valUp = cells[i][j];
-                }
-
-                var blurVal = (valDown + valRight + valUp + valLeft) / 4;
-                //var blurVal = (valDown * 0.30 + valRight + valUp * 0.30 + valLeft + valLeft2 * 0.20 + valRight2 * 0.20) / 3;
-                var ratio = 0.8;
-                var inc = 0.001;
-                if (mouseBool) {
-                    inc = -0.004;
-                }
-                var dispVal = lerp(cells[i][j], blurVal, ratio);
-                cellsTemp[i][j] = Math.min(dispVal + inc, 1);
-            }
-        }
+    function draw() {
+        UpdateAll(); // Runs all Update scripts
     }
 
-    // Copy
-    for (var i=0; i<numCellsX; i++) {
-        for (var j=0; j<numCellsY; j++) {
-        cells[i][j] = cellsTemp[i][j];
-    }}
-}
+    /// Simple Boolean driven by mouse state
+    var mouseBool = false;
+    function mousePressed() {mouseBool = true;}
+    function mouseReleased() {mouseBool = false;}
 
-/// Draws the cell status to the screen
-function Visualize() {
-    for (var i=0; i<numCellsX; i++) {
-        for (var j=0; j<numCellsY; j++) {
-        
-            var m = i; var n = j; // Substitution values
-
-            erase();
-            DrawCell(color(255,255,255), m, n);
-            noErase();
-
-            noStroke();
-            var c = color(0,0,0);
-            // Select Color
-            if (genColMethod == 0) { // Brightening
-                colorMode(RGB);
-                c = lerpColor(deadColor, liveColor, cells[m][n])
-            }
-            DrawCell(c, m, n);
-        }
+    /// Setup for Canvas elements
+    function CanvasPrep() {
+        extents[0] = windowWidth; 
+        extents[1] = windowHeight;
+        var cnv = createCanvas(extents[0], extents[1]);
+        cnv.parent('blurBackground')
+        cnv.position(0, 0);
+        frameRate(fr)
     }
-}
 
-function DrawCell(col, i, j) {
-    // Draw Cell
-    fill(col);
-    switch (shape) {
-        case 0:
-        default:
-            square(round(i * cellSize), round(j *cellSize), cellSize)
-        break;
+    /// Initialization of canvas elements
+    function Initialization() {
+        deadColor = color("#bfb9b2e6"); // The colour of a dead cell
+        liveColor = color("#f2ffef00"); // The colour of a live cell
+        InitializeCells();
+    }
 
-        case 1: // Circle
-            ellipse(round(i * cellSize), round(j *cellSize), cellSize*1.3)
-        break;
+    /// Update cycle for canvas elements
+    function UpdateAll() {
+
+        if (!autoRun) {return} // Functionality for pausing
+
+        RunActions();
+        MouseHover();
+        Visualize();
     }
 }
 
@@ -238,77 +79,188 @@ function DrawCell(col, i, j) {
     /// Sets up the cells used in the application
     function InitializeCells() {
 
-        cells = []; // Stores Cell States
         // Determine the number of cells to create based on screen proportions
-        numCellsX = floor(extentsX / cellSize); 
-        numCellsY = floor(extentsY/ cellSize);
+        numCells[0] = floor(extents[0] / cellSize); 
+        numCells[1] = floor(extents[1]/ cellSize);
+
+        bufferActive = 0; // Init
+        cells[0] = [];  
+        cells[1] = [];
 
         // Build the array of cells
-        for (var i=0; i<numCellsX; i++) {
-
-            cells[i] = [];
-            cellsTemp[i] = [];
-            for (var j=0; j<numCellsY; j++) {
+        for (var i=0; i<numCells[0]; i++) {
+            cells[0][i] = [];
+            cells[1][i] = [];
+            for (var j=0; j<numCells[1]; j++) {
 
                 switch (initMethod) {
                     case 2: // Mid
-                    cells[i][j] = 0.5
+                    cells[0][i][j] = neutralValue
                     break;
 
                     case 1: // Random
-                        cells[i][j] = random()
+                        cells[0][i][j] = random()
                     break;
 
-                    case 0: // Blank
+                    case 0: // Dark
                     default:
-                        cells[i][j] = 0;
+                        cells[0][i][j] = 0;
                     break;
                 }
 
-                cellsTemp[i][j] = 0; // Preparing a temp array
+                cells[1][i][j] = 0; // Preparing a temp array
             }
+        }
+    }
+
+        /// Determines when cycles are processed
+    function RunActions() {
+            
+        // Check if dx time exceeds wait time
+        if (autoRunTimeMax < millis() - autoRunTime) {
+            Interact();
+            autoRunTime = millis(); // Reset the timer
+        }
+    }
+
+    /// Mouse Press: inverts a cell at the clicked location
+    function MouseHover() {
+
+        // Find cell position relative to mouse
+        var i = floor((mouseX / windowWidth) * numCells[0]);
+        var j = floor((mouseY / windowHeight) * numCells[1]);
+
+        // Confirm Cell is within space
+        if (i >= 0 && i < numCells[0] && j >= 0 && j < numCells[1]) {
+            if (mouseBool) {  // Different effect depending on mouse status
+                cells[bufferActive][i][j] = 1;
+            } else {
+                cells[bufferActive][i][j] = 0;
+            } 
+        }
+    }
+
+    /// Applies Blur Matrix effect to cells on separate buffer, then swaps buffer
+    function Interact() {
+        for (var i=0; i<numCells[0]; i++) {
+            for (var j=0; j<numCells[1]; j++) {
+                
+                if (behaveMethod == 0) {    // Blur
+
+                    var dist = 2 ;   // Distance from cell for blur matrix calculation
+                    var startVal = cells[bufferActive][i][j]; // Cell's current value
+                    var neighbour = [startVal,startVal,startVal,startVal]; // array of neighbours
+                    
+                    // Check Neighbours
+                    if ( i < numCells[0] - dist) { // Right
+                        neighbour[1] = cells[bufferActive][i+dist][j];} 
+                    if (j < numCells[1] - dist) { // Down
+                        neighbour[2] = cells[bufferActive][i][j+dist];}
+                    if (i > dist) { // Left
+                        neighbour[3] = cells[bufferActive][i-dist][j];} 
+                    if (j > dist) { // Up
+                        neighbour[0] = cells[bufferActive][i][j-dist];} 
+
+                    // Blur matrix result
+                    var blurVal = (neighbour[2] + neighbour[1] + neighbour[0] + neighbour[3]) / 4;
+                    var ratio = 0.8;
+                    var inc = 0.001;    // Ambient blend value change change
+                    if (mouseBool) {inc = -0.002;}
+                    var dispVal = lerp(cells[bufferActive][i][j], blurVal, ratio);
+
+                    // Apply change to inactive buffer
+                    SwapBuffer();
+                    cells[bufferActive][i][j] = Math.min(dispVal + inc, 1);
+                    SwapBuffer();
+                }
+            }
+        }
+
+        // Use new buffer 
+        SwapBuffer();
+    }
+
+    /// Swaps between active display buffer 2D array (0/1 used for convenience)
+    function SwapBuffer() {
+        // Swap Active Buffer
+        (bufferActive == 0) ? 1 : 0
+    }
+
+
+    /// Draws the cell status to the screen
+    function Visualize() {
+        for (var i=0; i<numCells[0]; i++) {
+            for (var j=0; j<numCells[1]; j++) {
+            
+                var m = i; var n = j; // Substitution values
+
+                // Clear Region
+                erase();
+                DrawCell(color(255,255,255), m, n);
+                noErase();
+
+                // Draw new cell
+                noStroke();
+                var c = color(0,0,0);
+                c = lerpColor(deadColor, liveColor, cells[bufferActive][m][n])
+                DrawCell(c, m, n);
+            }
+        }
+    }
+
+    function DrawCell(col, i, j) {
+        // Draw Cell
+        fill(col);
+        switch (shape) {
+            case 0:
+            default:
+                square(round(i * cellSize), round(j *cellSize), cellSize)
+            break;
+
+            case 1: // Circle
+                ellipse(round(i * cellSize), round(j *cellSize), cellSize*1.3)
+            break;
         }
     }
 }
 
 ////////////////// HELPERS ///////////////////////////////
 {
-    function clamp(value, minVal, maxVal) {
-        return Math.min(Math.max(value, minVal), maxVal);
-    }
-
     /// Refreshes window when resized
     function windowResized() {
-        extentsX = windowWidth;
-        extentsY = windowHeight;
-        resizeCanvas(extentsX, extentsY);
+        extents[0] = windowWidth;
+        extents[1] = windowHeight;
+        resizeCanvas(extents[0], extents[1]);
         CopyCellsToNewArraySize();
     }
 
     function CopyCellsToNewArraySize() {
 
-        // Remember the old values
-        var cloneCellsX = numCellsX;
-        var cloneCellsY = numCellsY;
+        // Determine if larger or smaller
+        var cloneCells = [0,0];
+        var min = [0,0];
+        for (var q=0; q<2; q++) {
+            // Remember the old values
+            cloneCells[q] = numCells[q]; 
+            // Determine the number of cells to create based on screen proportions
+            numCells[q] = floor(extents[q] / cellSize); 
+            // Build the array of cells, retaining old values where applicable
+            min[q] = Math.min(numCells[q],cloneCells[q]);
+        }
 
-        // Determine the number of cells to create based on screen proportions
-        numCellsX = floor(extentsX / cellSize); 
-        numCellsY = floor(extentsY/ cellSize);
+        // Fill Empty cells
+        for (var i=0; i<numCells[0]; i++) {
 
-        // Build the array of cells, retaining old values where applicable
-        var minX = Math.min(numCellsX,cloneCellsX);
-        var minY = Math.min(numCellsY,cloneCellsY);
-        for (var i=0; i<numCellsX; i++) {
-
-            if (i>= minX) {
-                cells[i] = [];
-                cellsTemp[i] = [];
+            if (i>= min[0]) { // Prep empty arrays
+                cells[0][i] = [];
+                cells[1][i] = [];
             }
-            for (var j=0; j<numCellsY; j++) {
 
-                if (i >= minX || j >= minY) { // Clone over the old cells
-                    cells[i][j] = 0;
-                    cellsTemp[i][j]=0;
+            for (var j=0; j<numCells[1]; j++) {
+
+                if (i >= min[0] || j >= min[1]) { // Fill new cells with value
+                    cells[0][i][j] = 0;
+                    cells[1][i][j] = 0;
                 }
             }
         }

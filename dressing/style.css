@@ -19,6 +19,12 @@ footer {
     right:0
 }
 
+#blurBackground {
+    position:fixed;
+    z-index:-2;
+    pointer-events:none;
+}
+
 #menuBar {
     font-family: 'Major Mono Display', monospace;
     
