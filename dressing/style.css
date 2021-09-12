@@ -14,13 +14,20 @@ body {
 footer {
     font-family: sans-serif;
     text-align: right;
+    position:fixed;
+    bottom:0;
+    right:0
 }
 
 #menuBar {
     font-family: 'Major Mono Display', monospace;
-    background-color: #f0eeeb;
+    
 
 }
+
+::selection {
+    background: #ffb7b7; /* WebKit/Blink Browsers */
+  }
 
 a:link, a:visited {
     color: #736d68;

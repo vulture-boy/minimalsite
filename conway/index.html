@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="p5.min.js"></script>
+    <script src="p5.dom.js"></script>
+    <script src="conway.js"></script>
+
+    <title>tyson moll: conway machine</title>
+  </head>
+  <body>
+
+      <div id="menu">
+        <div id="mainInfo">
+          <a href="#" onclick="ShowPage(0)" id="backLink" display="none">back to sim</a>
+          <a href="#" onclick="ShowPage(1)" id="aboutLink">conway machine</a>
+          <a href="#" onclick="ShowPage(2)" id="spaceLink">what's a spaceship?</a><br>
+        </div>
+        
+        <div class="page" id="simPage">
+          <button id "clrBtn" onclick="ClearLife()">Clear</button>
+          <button id="pseToggle" onclick="PauseToggle()">Pause</button>
+          <button id="tick" onclick="Tick()">+1</button>
+          <br>
+          <button id="optToggle" onclick="OptionToggle()">Hide Options</button>
+          <button id="refresh" onclick="InitializeCells()">Respawn</button>
+
+          <div id="options" display="block">
+          <br>
+            <div id="cellSizeValue">Cell Size: 5</div>
+            <input type="range" min="1" max="128" value="5" 
+              class="slider" id="cellSize" oninput="UpdateCellSize()"><br>
+            <label for="respResize"><i>Respawn on Resize:</i> </label>
+            <input type="checkbox" id="respResize" checked> <br>
+            <div id="updateSpeedValue">Update Delay: 500</div>
+            <input type="range" min="1" max="3000" value="500" 
+              class="slider" id="updateSpeed" oninput="UpdateDelay()">
+            <span max-size="50%"><p><u>Note:</u> update delay (in millis)<br> is dependent on processing power.</p></span>
+
+            Live Cell:
+            <input type="color" id="colLive" onchange="GetNewColor()"> 
+            Dead Cell:
+            <input type="color" id="colDead" onchange="GetNewColor()"> 
+            <br>
+
+            <button id="randomBtn" onclick="RandomizeColors()">Randomize Colours!</button> 
+            <br><br>
+            Mirror Mode
+            <input type="number" min="0" max="50" value="0" id="cellMirror" onchange="UpdateMirror()">
+            <label for="gridDisplay">Grid</label>
+            <input type="checkbox" id="gridDisplay">
+            <input type="color" id="colGrid" onchange="GetNewColor()"> 
+            <br>
+            Cell Age 
+            <input type="number" min="1" max="50" value="1" id="cellAge" onchange="UpdateAge()">
+            Age Style
+            <input type="number" min="0" max="50" value="1" id="cellAgeCol" onchange="UpdateGenCol()"> 
+          </div>
+        </div>
+
+        <div class="page" id="aboutPage">
+          <p><b>
+            John Horton Conway's Game of Life was devised in the late 1960s. This is an execution of it built using javascript, with p5.js and p5.dom.js. <br>
+            Each pixel displayed is recorded in a two-dimensional array as either living or dead (1 or 0). <br>The game begins with a Seed (e.g. random noise), then each cell within
+            the grid follows a series of four rules simultaneously with each of their eight neighbouring cells. <br>
+            <u>These are the four basic rules:</u>
+            <ul>
+              <li>Underpopulation: A living cell dies when surrounded by less than two other living cells.</li>
+              <li>Overpopulation: A living cell dies when surrounded by more than three other living cells.</li>
+              <li>Survival: A living cell survives when surrounded by two or three living cells.</li>
+              <li>Reproduction: A dead cell becomes a living cell when there are exactly three living neighbours.</li>
+            </ul>
+            <br>
+            As a non-player game, there is no objective. Feel free to manipulate some of the additional options included in this web simulation.
+            </b></p>
+        </div>
+
+        <div class="page" id="spacePage">
+          <p>You may notice that some groups of living cells appear to translate themselves across the screen. <br><b>These are nicknamed spaceships. The smallest of these is the 'glider'.</b><br> 
+            You can probably find out more online <a href="https://lmgtfy.com/?q=conway+spaceships">by googling them.</a><br><br>
+
+            <img src="./conwayspace.gif" alt="a glider">
+
+          </p>
+        </div>
+      </div>
+
+      <div id="canvas"></div>
+  </body></html>
