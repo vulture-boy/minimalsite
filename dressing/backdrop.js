@@ -25,7 +25,7 @@ By Tyson Moll (2021)
     var extents = [0,0]; // Determines the size of the canvas
     var autoRun = true; // Whether to automatically advance the cycle
     var autoRunTime = 0; // Last recorded cycle end time
-    var fr = 30; // Frame rate
+    var fr = 15; // Frame rate
     var autoRunTimeMax = 60;
 }
 
