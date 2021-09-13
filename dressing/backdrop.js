@@ -25,7 +25,7 @@ By Tyson Moll (2021)
     var extents = [0,0]; // Determines the size of the canvas
     var autoRun = true; // Whether to automatically advance the cycle
     var autoRunTime = 0; // Last recorded cycle end time
-    var fr = 15; // Frame rate
+    var fr = 30; // Frame rate
     var autoRunTimeMax = 60;
 }
 
@@ -164,8 +164,8 @@ By Tyson Moll (2021)
                     // Blur matrix result
                     var blurVal = (neighbour[2] + neighbour[1] + neighbour[0] + neighbour[3]) / 4;
                     var ratio = 0.8;
-                    var inc = 0.001;    // Ambient blend value change change
-                    if (mouseBool) {inc = -0.002;}
+                    var inc = 0.000;    // Ambient blend value change change
+                    if (mouseBool) {inc = -0.00;}
                     var dispVal = lerp(cells[bufferActive][i][j], blurVal, ratio);
 
                     // Apply change to inactive buffer

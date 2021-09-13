@@ -4,11 +4,11 @@ h1 {
 
 }
 
-
 body {
-    font-family: 'Arial', monospace;
+    font-family: 'urbanist', sans-serif;
     color: #262625;
     background-color: #f0eeeb;
+    cursor: none;
 }
 
 footer {
@@ -19,6 +19,10 @@ footer {
     right:0
 }
 
+hr {
+    color: #262625;
+}
+
 #blurBackground {
     position:fixed;
     z-index:-2;
@@ -27,8 +31,6 @@ footer {
 
 #menuBar {
     font-family: 'Major Mono Display', monospace;
-    
-
 }
 
 ::selection {
