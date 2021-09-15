@@ -1,8 +1,6 @@
 /*
-
 Blur Matrix Backdrop
 By Tyson Moll (2021)
-
 */
 
 // Cell Properties 
@@ -58,8 +56,8 @@ By Tyson Moll (2021)
 
     /// Initialization of canvas elements
     function Initialization() {
-        deadColor = color("#bfb9b2e6"); // The colour of a dead cell
-        liveColor = color("#f2ffef00"); // The colour of a live cell
+        deadColor = color("#bfb9b2"); // The colour of a dead cell
+        liveColor = color("#f2ffef"); // The colour of a live cell
         InitializeCells();
     }
 
