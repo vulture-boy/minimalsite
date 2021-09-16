@@ -162,8 +162,8 @@ By Tyson Moll (2021)
                     // Blur matrix result
                     var blurVal = (neighbour[2] + neighbour[1] + neighbour[0] + neighbour[3]) / 4;
                     var ratio = 0.8;
-                    var inc = 0.000;    // Ambient blend value change change
-                    if (mouseBool) {inc = -0.00;}
+                    var inc = 0.001;    // Ambient blend value change change
+                    if (mouseBool) {inc = -0.002;}
                     var dispVal = lerp(cells[bufferActive][i][j], blurVal, ratio);
 
                     // Apply change to inactive buffer
