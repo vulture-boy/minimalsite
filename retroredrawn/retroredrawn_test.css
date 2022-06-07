@@ -2,6 +2,10 @@ body {
     background-color: black;
 }
 
+.thumbDesc {
+    padding: 5px;
+}
+
 #backdrop {
     width: 100%;
     height: auto;
@@ -29,3 +33,4 @@ body {
 
     top: 55%;
 }
+
