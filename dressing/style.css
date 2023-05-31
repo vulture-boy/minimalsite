@@ -23,6 +23,10 @@ hr {
     color: #262625;
 }
 
+ul {
+    list-style-type: circle;
+}
+
 #blurBackground {
     position:fixed;
     z-index:-2;
