@@ -1,9 +1,3 @@
-h1 {
-    font-family: serif;
-    background-color: #f0eeeb;
-
-}
-
 body {
     font-family: 'urbanist', sans-serif;
     color: #262625;
@@ -35,6 +29,12 @@ ul {
 
 #menuBar {
     font-family: 'Major Mono Display', monospace;
+}
+
+#galleryDescriptorHeader {
+    text-align: right;
+    padding-top: 6%;
+    padding-right: 2%;
 }
 
 ::selection {
