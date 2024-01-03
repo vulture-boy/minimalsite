@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    <script src="dressing/backdrop_min.js"></script>
+    <div id="blurBackground" class="jumbotron"></div>
+
+  <head>
+    <script src="dressing/htmlInclude.js"></script>
+    <div w3-include-html="common/header.html"></div>
+
+    <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+  <link rel="stylesheet" href="dressing/style.css">
+  <link href="dressing/sidebars.css" rel="stylesheet">
+
+    <title>Tyson Moll - CNE 2022</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!--Body-->
+      <div class="row">
+
+        <!--Menu-->
+        <div class="col-sm-3">
+          <div w3-include-html="common/menubar.html"></div>
+        </div>
+
+        <div class="col">
+            <div id="galleryDescriptorHeader">
+                <h1>Merchandise Gallery</h1>
+                <h3>Miscellaneous items for sale.</h3>
+                <p>Physical goods are primarially distributed though <a href="https://www.instagram.com/zombiechickie/">Zombie Chickie Crafts</a>, based in Ontario. You can also directly contact me about prints and T-Shirts.</p>
+            </div>
+
+        </div>
+
+        <!--Content-->
+        <div class="row justify-content-center">
+
+          <hr>
+
+          <!--PAGE CONTENT HERE-->
+          
+          <a href="images/merch_thumbs/water.png" data-toggle="lightbox" data-gallery="base-gallery" data-caption="perro de sed" class="col-md-4">
+            <div class="thumb-img"><img src="images/merch_thumbs/water.png" class="img-fluid"></div>
+          </a>
+          <a href="images/merch_thumbs/goroh.png" data-toggle="lightbox" data-gallery="base-gallery" data-caption="samurai goroh (from F-Zero)" class="col-md-4">
+            <div class="thumb-img"><img src="images/merch_thumbs/goroh.png" class="img-fluid"></div>
+          </a>
+          <a href="images/merch_thumbs/garlock.png" data-toggle="lightbox" data-gallery="base-gallery" data-caption="garlock" class="col-md-4">
+            <div class="thumb-img"><img src="images/merch_thumbs/garlock.png" class="img-fluid"></div>
+          </a>
+          <a href="images/merch_thumbs/bird.png" data-toggle="lightbox" data-gallery="base-gallery" data-caption="sunrise bird" class="col-md-4">
+            <div class="thumb-img"><img src="images/merch_thumbs/bird.png" class="img-fluid"></div>
+          </a>
+          <a href="images/merch_thumbs/tang.png" data-toggle="lightbox" data-gallery="base-gallery" data-caption="tang fan" class="col-md-4">
+            <div class="thumb-img"><img src="images/merch_thumbs/tang.png" class="img-fluid"></div>
+          </a>
+          
+        <br>
+        <hr>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!--Lightbox Support-->
+  <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+
+  <!--Footer-->
+    <div w3-include-html="common/footer.html"></div>
+
+  </html>
+
+      <script>
+    includeHTML();
+    </script>
