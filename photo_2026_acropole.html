@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    <script src="dressing/backdrop_min.js"></script>
+    <div id="blurBackground" class="jumbotron"></div>
+
+  <head>
+    <script src="dressing/htmlInclude.js"></script>
+    <div w3-include-html="common/header.html"></div>
+
+    <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+  <link rel="stylesheet" href="dressing/style.css">
+  <link href="dressing/sidebars.css" rel="stylesheet">
+
+    <title>Tyson Moll - L'Acropole des Draveurs &amp; Hautes-Gorges-de-la-Rivi&egrave;re-Malbaie</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!--Body-->
+      <div class="row">
+
+        <!--Menu-->
+        <div class="col-sm-3">
+          <div w3-include-html="common/menubar.html"></div>
+        </div>
+
+        <div class="col">
+            <div id="galleryDescriptorHeader">
+                <h1>L'Acropole des Draveurs &amp; Hautes-Gorges-de-la-Rivi&egrave;re-Malbaie</h1>
+                <h3>Unique landscape in some of Quebec's tallest ridges.</h3>
+                <p>L'Acropole des Draveurs is a beautiful trail in Hautes-Gorges-de-la-Rivi&egrave;re-Malbaie, one of Quebec's national parks. The trail is among Sepaq's more difficult trails at a distance of about 13km round trip and an elevation gain of 800m (or x2.5 the height of the Eiffel Tower according to Sepaq's website!). The trail has very delicate vegetation along the route, particularly around the top where the landscape shifts from being densely forested to a very flat and grassy top decorated with mossy boulders. Occasionally you pass by some high altitude lakes which apparently don't have any fish in them due to the height and are accordingly among some of the clearest lakes you can encounter. This photographic journal covers sights on the route up and down and the panoramic vistas to be seen. The trail is fairly popular, with joggers passing up and down with light packs(?!) and shuttles of visitors coming in and out in waves. The switchback trail itself is well taken care of, especially the first half; the latter half begins to get into spaces where the exposed rocks and boulders begin to create a bit of a terrain challenge. Surprisingly many didn't come with hiking poles, which we credit to saving our joints on the way down. The following day we went on a trip down the Malbaie River in the middle of the gorge where we had the chance to see some of the rocky cliff details from below.</p>
+            </div>
+
+        </div>
+
+        <!--Content-->
+        <div class="col-12">
+          <hr>
+          <div id="gallery" class="row justify-content-center"></div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!--Footer-->
+    <div w3-include-html="common/footer.html"></div>
+
+  </html>
+
+      <script>
+
+
+    const gallery = document.getElementById('gallery');
+    const imageFiles = [
+      { src: 'IMG_9319.jpg', caption: 'bitter bolete' },
+      { src: 'IMG_9351.jpg', caption: 'stone rimmed trail' },
+      { src: 'IMG_9355-Pano.jpg', caption: 'glacier-hewn stones and moss' },
+      { src: 'IMG_9371.jpg', caption: 'peeking over evergreens' },
+      { src: 'IMG_9373-Pano.jpg', caption: 'unusual birches' },
+      { src: 'IMG_9376.jpg', caption: 'shadowy birches' },
+      { src: 'IMG_9450-Pano.jpg', caption: 'first breath above the trees' },
+      { src: 'IMG_9475.jpg', caption: 'balded summit' },
+      { src: 'IMG_9478-Pano.jpg', caption: 'stone plate on the second summit' },
+      { src: 'IMG_9485-Pano.jpg', caption: 'rest and sightlines' },
+      { src: 'IMG_9486.jpg', caption: 'the trail along the ridge 1' },
+      { src: 'IMG_9495.jpg', caption: 'the trail along the ridge 2' },
+      { src: 'IMG_9496-Pano.jpg', caption: 'mossen stones and low flora against the misty Laurentians' },
+      { src: 'IMG_9512.jpg', caption: 'mossy outcropping' },
+      { src: 'IMG_9515-Pano.jpg', caption: 'high altitude lakes under cloud shadows' },
+      { src: 'IMG_9566.jpg', caption: 'character of the cliffside' },
+      { src: 'IMG_9572.jpg', caption: 'bog bilberry macro' },
+      { src: 'IMG_9574.jpg', caption: 'fir macro' },
+      { src: 'IMG_9582.jpg', caption: 'glacier residuals' },
+      { src: 'IMG_9585.jpg', caption: 'bog labrador tea macro' },
+      { src: 'IMG_9587.jpg', caption: 'crescent map lichen on mineral outcropping' },
+      { src: 'IMG_9595.jpg', caption: 'flowering bog labrador tea among bog bilberry' },
+      { src: 'IMG_9600.jpg', caption: 'wind-exposed evergreens' },
+      { src: 'IMG_9607.jpg', caption: 'green alder macro' },
+      { src: 'IMG_9620.jpg', caption: 'boulder row with smaller cubic boulder' },
+      { src: 'IMG_9641.jpg', caption: 'intermediate bellflower' },
+      { src: 'IMG_9649.jpg', caption: 'canadian bunchberry' },
+      { src: 'IMG_9667.jpg', caption: 'at the campsite' },
+      { src: 'IMG_9668.jpg', caption: 'Barrage des &Eacute;rables' },
+      { src: 'IMG_9688.jpg', caption: 'view beneath the three summits' },
+      { src: 'IMG_9693.jpg', caption: 'pretty sweet cliff face across the water' },
+      { src: 'IMG_9694.jpg', caption: 'rounded mountainface' },
+      { src: 'IMG_9695.jpg', caption: 'green river to Malbaie' },
+      { src: 'IMG_9713.jpg', caption: 'dark shadow on the mountain' },
+      { src: 'IMG_9738.jpg', caption: 'chiseled ridges' },
+      { src: 'IMG_9756.jpg', caption: 'soar' },
+      { src: 'IMG_9767.jpg', caption: 'in Hautes-Gorges-de-la-Rivi&egrave;re-Malbaie' },
+    ];
+
+    gallery.innerHTML = imageFiles.map((image) => {
+      const src = `images/photog/2026_acropole/${image.src}`;
+      return `
+        <a href="${src}" data-toggle="lightbox" data-caption="${image.caption}" data-gallery="base-gallery" class="col-md-4 mb-3">
+          <div class="thumb-img"><img src="${src}" class="img-fluid" alt="${image.caption}"></div>
+        </a>`;
+    }).join('');
+    includeHTML();
+    </script>
+
+      <!--Lightbox Support-->
+  <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
