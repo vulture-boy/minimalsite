@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    <script src="dressing/backdrop_min.js"></script>
+    <div id="blurBackground" class="jumbotron"></div>
+
+  <head>
+    <script src="dressing/htmlInclude.js"></script>
+    <div w3-include-html="common/header.html"></div>
+
+    <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+  <link rel="stylesheet" href="dressing/style.css">
+  <link href="dressing/sidebars.css" rel="stylesheet">
+
+    <title>Tyson Moll - Sentier des Falaises, Valll&eacute;e Bras-du-Nord</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!--Body-->
+      <div class="row">
+
+        <!--Menu-->
+        <div class="col-sm-3">
+          <div w3-include-html="common/menubar.html"></div>
+        </div>
+
+        <div class="col">
+            <div id="galleryDescriptorHeader">
+                <h1>Sentier des Falaises, Valll&eacute;e Bras-du-Nord</h1>
+                <h3>Massive boulders and flora along a steep ascent.</h3>
+                <p>The trek up the Sentier des Falaises is well trimmed but has many stones to maneuver around and above. This made it difficult for me to pay much mind to the scenery on the way up as I was paying a lot more attention to my feet and stamina, but I really saw the spectacular nature of it on the way down with the boulders and their foliage catching the late rays of the sun. The better shots seem to have primarially been family photos and the macro images I've included in this gallery; hope you enjoy!</p>
+            </div>
+
+        </div>
+
+        <!--Content-->
+        <div class="col-12">
+          <hr>
+          <div id="gallery" class="row justify-content-center"></div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!--Footer-->
+    <div w3-include-html="common/footer.html"></div>
+
+  </html>
+
+      <script>
+
+
+    const gallery = document.getElementById('gallery');
+    const imageFiles = [
+      { src: 'IMG_9178.jpg', caption: 'root carpet' },
+      { src: 'IMG_9179.jpg', caption: 'shade over mountain maple' },
+      { src: 'IMG_9185.jpg', caption: 'papery birch' },
+      { src: 'IMG_9215.jpg', caption: 'gilled mushroom under fern' },
+      { src: 'IMG_9224.jpg', caption: 'algal haircap moss' },
+      { src: 'IMG_9226.jpg', caption: 'canadian bunchberry under spotlight' },
+      { src: 'IMG_9247.jpg', caption: 'orange hawkweed 1' },
+      { src: 'IMG_9248.jpg', caption: 'orange hawkweed 2' },
+      { src: 'IMG_9258.jpg', caption: 'spruce macro' },
+      { src: 'IMG_9268.jpg', caption: 'chocolate tube slime mold' },
+      { src: 'IMG_9296.jpg', caption: 'staggering boulders 1' },
+      { src: 'IMG_9302-Pano.jpg', caption: 'staggering boulders 2' }
+    ];
+
+    gallery.innerHTML = imageFiles.map((image) => {
+      const src = `images/photog/2026_bras_du_nord/${image.src}`;
+      return `
+        <a href="${src}" data-toggle="lightbox" data-caption="${image.caption}" data-gallery="base-gallery" class="col-md-4 mb-3">
+          <div class="thumb-img"><img src="${src}" class="img-fluid" alt="${image.caption}"></div>
+        </a>`;
+    }).join('');
+    includeHTML();
+    </script>
+
+      <!--Lightbox Support-->
+  <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
